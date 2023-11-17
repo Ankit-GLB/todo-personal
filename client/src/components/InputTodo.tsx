@@ -15,7 +15,10 @@ export default function InputTodo () {
             headers : {
                 "Content-type" : "application/json",
             },
-            body : JSON.stringify({title : newTodo})
+            body : JSON.stringify({
+                todoId : Math.floor(Math.random()*100000),
+                title : newTodo,
+            })
         });
         const newTodoData = await response.json();
         setTodos([...todos,newTodoData]);

@@ -1,7 +1,7 @@
 import mongoose, { mongo } from "mongoose";
 
 const todoSchema = new mongoose.Schema({
-    todoId : String,
+    todoId : Number,
     title : String
 })
 

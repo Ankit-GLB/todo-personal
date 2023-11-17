@@ -4,9 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const todoModel_1 = require("./models/todoModel");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
-const todoArray = [];
+// const todoArray : string[] = [];
 app.get("/", (req, res) => {
     res.json({
         msg: "the serve is on fire!!"
@@ -15,7 +16,7 @@ app.get("/", (req, res) => {
 app.get("/todos", (req, res) => {
     try {
         // res.json({ array : todoArray })
-        res.json(todoArray);
+        res.json(todoModel_1.todoArray);
     }
     catch (e) {
         res.json({ msg: "some error found" });
@@ -23,12 +24,18 @@ app.get("/todos", (req, res) => {
 });
 app.post("/todos", (req, res) => {
     const input = req.body;
-    const todoData = input.title;
-    console.log(todoData);
-    todoArray.push(todoData);
-    res.json(todoData);
+    console.log(input);
+    const newdata = new todoModel_1.todoArray(input);
+    newdata.save();
+    res.json(input);
+});
+// temp key
+app.use("/*", (req, res) => {
+    res.json({
+        msg: "server goind right"
+    });
 });
 app.listen(3000, () => {
     console.log(`serve is running on port 3000`);
 });
-//  mongodb+srv://ankitglbitm:e18pb2110005@todo-personal.pzicogv.mongodb.net/
+// here put your mongoose connect part

@@ -1,11 +1,13 @@
 import express from "express"
 import { Request, Response } from "express";
 import mongoose from "mongoose";
+import {todoArray} from "./models/todoModel"
 const app = express();
 
 app.use(express.json())
 
 type bodyInputType = {
+    todoId : number
     title : string
 }
 
@@ -29,10 +31,10 @@ app.get("/todos", (req : Request, res : Response) => {
 
 app.post("/todos", (req : Request, res : Response) =>{
     const input : bodyInputType = req.body;
-    const todoData : string = input.title;
-    console.log(todoData)
-    todoArray.push(todoData);
-    res.json(todoData);
+    console.log(input)
+    const newdata = new todoArray(input);
+    newdata.save();
+    res.json(input);
 })
 
 // temp key
@@ -47,3 +49,4 @@ app.listen(3000, () =>{
     console.log(`serve is running on port 3000`);
 })
 
+// here put your mongoose connect part
