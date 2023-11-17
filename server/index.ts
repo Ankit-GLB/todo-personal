@@ -1,5 +1,6 @@
 import express from "express"
 import { Request, Response } from "express";
+import mongoose from "mongoose";
 const app = express();
 
 app.use(express.json())
@@ -8,7 +9,7 @@ type bodyInputType = {
     title : string
 }
 
-const todoArray : string[] = [];
+// const todoArray : string[] = [];
 
 app.get("/", (req : Request,res : Response) => {
     res.json({
@@ -34,10 +35,15 @@ app.post("/todos", (req : Request, res : Response) =>{
     res.json(todoData);
 })
 
+// temp key
+app.use("/*", (req : Request, res : Response) => {
+    res.json({
+        msg : "server goind right"
+    })
+})
+
+
 app.listen(3000, () =>{
     console.log(`serve is running on port 3000`);
 })
 
-
-
-//  mongodb+srv://ankitglbitm:e18pb2110005@todo-personal.pzicogv.mongodb.net/
